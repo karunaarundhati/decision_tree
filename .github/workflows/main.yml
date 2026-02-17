@@ -1,0 +1,25 @@
+name: Run Deep Learning Classification Script
+
+on:
+  push:                # Runs whenever you push code
+  workflow_dispatch:   # Allows manual trigger from Actions tab
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas matplotlib scikit-learn keras
+
+      - name: Run Deep Learning Classification script
+        run: python deeplearning_classification.py
